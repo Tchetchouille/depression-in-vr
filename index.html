@@ -4,11 +4,44 @@
         <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     </head>
     <body>
-        <a-scene>
-            <a-entity camera="" position="0 1.6 0" wasd-controls="" rotation="" look-controls="" aframe-injected="" data-aframe-inspector-original-camera=""></a-entity>
-            <a-box id="floor" position="0 0 0" rotation="0 0 0" color="#7f7a77"></a-box>
-            <a-sky color="#ECECEC"></a-sky>
+        <a-scene id="temple"
+            light="defaultLightsEnabled: false">
+            <!-- Assets Management System -->
+            <a-assets>
+                <!-- Assets from JulioVII : https://juliovii.itch.io/stoneandbrickspk01 -->
+                <img id="stone" src="assets/textures/stone_base_01/stone_base_01_basecolor.jpg" alt="">
+                <img id="stone_normal" src="assets/textures/stone_base_01/stone_base_01_normal.jpg" alt="">
+                <img id="stone_occlusion" src="assets/textures/stone_base_01/stone_base_01_ambientocclusion.jpg.jpg" alt="">
+            </a-assets>
+            <a-entity id="playerCam"
+                camera=""
+                wasd-controls=""
+                look-controls=""
+                position="0 1.6 0" rotation="" 
+                aframe-injected="" 
+                data-aframe-inspector-original-camera="">
+            </a-entity>
+            <a-box id="floor" 
+                position="0 0 0" rotation="0 0 0" 
+                color="#a39d9a"
+                src="#stone"
+                repeat="1 1"
+                normal-map="#stone_normal"
+                normal-texture-repeat="1 1"
+                normal-scale="1 1"
+                ambiantOcclusionMap="#stone_occlusion"
+                roughness="0.8">
+            </a-box>
+            <a-entity id="basicLight"
+                light="intensity: 0.6; castShadow: true" 
+                position="0 1.99194 -4.878" 
+                data-aframe-default-light="" 
+                aframe-injected="">
+            </a-entity>
+            <a-sky 
+                color="#181414">
+            </a-sky>
         </a-scene>
+        <script src="setup.js"></script>
     </body>
-    <script src="index.js"></script>
 </html>
