@@ -11,7 +11,7 @@
                 <!-- Assets from JulioVII : https://juliovii.itch.io/stoneandbrickspk01 -->
                 <img id="stone" src="assets/textures/stone_base_01/stone_base_01_basecolor.jpg" alt="">
                 <img id="stone_normal" src="assets/textures/stone_base_01/stone_base_01_normal.jpg" alt="">
-                <img id="stone_occlusion" src="assets/textures/stone_base_01/stone_base_01_ambientocclusion.jpg.jpg" alt="">
+                <img id="stone_occlusion" src="assets/textures/stone_base_01/stone_base_01_ambientocclusion.jpg" alt="">
             </a-assets>
             <a-entity id="playerCam"
                 camera=""
@@ -22,7 +22,8 @@
                 data-aframe-inspector-original-camera="">
             </a-entity>
             <a-box id="floor" 
-                position="0 0 0" rotation="0 0 0" 
+                scale ="2 50 2" position="0 -25 0" rotation="0 0 0" 
+                shadow="receive: true"
                 color="#a39d9a"
                 src="#stone"
                 repeat="1 1"
@@ -32,12 +33,29 @@
                 ambiantOcclusionMap="#stone_occlusion"
                 roughness="0.8">
             </a-box>
+            <a-box id="frame" 
+                scale="0.75 2 0.1" position="0 0.75 -1.9" rotation="-20 0 0"
+                shadow="cast: true receive: true"
+                color="#a39d9a"
+                roughness="0.9">
+            </a-box>
             <a-entity id="basicLight"
                 light="intensity: 0.6; castShadow: true" 
                 position="0 1.99194 -4.878" 
                 data-aframe-default-light="" 
                 aframe-injected="">
             </a-entity>
+            <a-cylinder id="candleLeft"
+                scale="0.05 0.4 0.05" position="-1.5 0.125 -1.8" rotation=""
+                shadow="cast: true"
+                color="#a39d9a">
+                <a-entity id="candleLightLeft"
+                    light="intensity: 2; castShadow: true; color: #ffa256; decay: 2; distance:1.6; groundColor: #FFFFFF; type: point" 
+                    scale="0.1 0.1 0.1" position="0 1.2 0"
+                    data-aframe-default-light="" 
+                    aframe-injected="">
+                </a-entity>
+            </a-cylinder>
             <a-sky 
                 color="#181414">
             </a-sky>
@@ -45,3 +63,9 @@
         <script src="setup.js"></script>
     </body>
 </html>
+
+
+<a-entity id="candleLight" 
+</a-entity>
+
+light="intensity:  2;  castShadow:  true;  color:  #ffa256;  groundColor:  #FFFFFF;  type:  point"
