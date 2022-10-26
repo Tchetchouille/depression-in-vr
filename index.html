@@ -21,6 +21,12 @@
                 aframe-injected="" 
                 data-aframe-inspector-original-camera="">
             </a-entity>
+            <a-entity id="basicLight"
+                light="intensity: 0.6; castShadow: true" 
+                position="0 1.99194 -4.878" 
+                data-aframe-default-light="" 
+                aframe-injected="">
+            </a-entity>
             <a-box id="floor" 
                 scale ="2 50 2" position="0 -25 0" rotation="0 0 0" 
                 shadow="receive: true"
@@ -32,34 +38,65 @@
                 normal-scale="1 1"
                 ambiantOcclusionMap="#stone_occlusion"
                 roughness="0.8">
+                <script id="floorSetUp">
+                    // FLOOR SETUP
+                    // We set the room size based on the space available irl (min 2m)
+                    let room_width = 4;
+                    let room_length = 4;
+                    let floor_heigth = 50;
+
+                    // We get the floor from the html file
+                    let floor = document.getElementById("floor");
+
+                    // We scale and place the floor accordingly to the available space
+                    floor.setAttribute('scale', {x: room_width, y: floor_heigth, z: room_length});
+                    floor.setAttribute('position', {x: 0, y: -floor_heigth/2, z: -floor.getAttribute('scale').z/2});
+                </script>
             </a-box>
             <a-box id="frame" 
                 scale="0.75 2 0.1" position="0 0.75 -1.9" rotation="-20 0 0"
                 shadow="cast: true receive: true"
                 color="#a39d9a"
-                roughness="0.9">
+                roughness="0.9"
+                >
             </a-box>
-            <a-entity id="basicLight"
-                light="intensity: 0.6; castShadow: true" 
-                position="0 1.99194 -4.878" 
-                data-aframe-default-light="" 
-                aframe-injected="">
-            </a-entity>
-            <a-cylinder id="candleLeft"
-                scale="0.05 0.4 0.05" position="-1.5 0.125 -1.8" rotation=""
-                shadow="cast: true"
-                color="#a39d9a">
-                <a-entity id="candleLightLeft"
-                    light="intensity: 2; castShadow: true; color: #ffa256; decay: 2; distance:1.6; groundColor: #FFFFFF; type: point" 
-                    scale="0.1 0.1 0.1" position="0 1.2 0"
-                    data-aframe-default-light="" 
-                    aframe-injected="">
-                </a-entity>
-            </a-cylinder>
+            <script id="candlesGenerator">
+                // CANDLES SETUP
+                let temple = document.getElementById("temple");
+                // FWe create i (2) candles, set their attributes and add them to the scene
+                for(i=0; i<2; i++){
+                    // We want one candle on each side
+                    let side = 1;
+                    // How much the light will flicker in position horizontally
+                    let flickerPos = 0.2;
+                    // The intensity will flicker between intLow and intHigh
+                    let intLow = 4.5;
+                    let intHigh = 5;
+                    if(i%2 == 0){
+                        side = -1;
+                    }
+                    let candle = document.createElement("a-cylinder");
+                    candle.setAttribute('scale', {x: 0.05, y: 0.4, z: 0.05});
+                    candle.setAttribute('position', {x: 1.2 * side, y: 0.125, z: -1.9});
+                    candle.setAttribute('shadow', "cast: true");
+                    candle.setAttribute('color', "#a39d9a");
+                    let flame = document.createElement("a-entity");
+                    flame.setAttribute('light', {intensity: intLow, castShadow: true, color: "#ffa256", decay: 1.5, distance: 1.6, groundColor: "#FFFFFF", type: "point"});
+                    flame.setAttribute('scale', {x: 0.1, y: 0.1, z:0.1});
+                    flame.setAttribute('position', {x: flickerPos, y: 1.2, z: flickerPos});
+                    let animation__Int = document.createAttribute('animation__Int');
+                    let animation__Pos = document.createAttribute('animation__Pos');
+                    animation__Int.value = `property: light.intensity; to: ${intHigh}; dur: 120; loop: true; dir: alternate`;
+                    animation__Pos.value = `property: position; to: ${-flickerPos} 1.2 ${-flickerPos}; dur: 100; loop: true; dir: alternate`;
+                    flame.setAttributeNode(animation__Int);
+                    flame.setAttributeNode(animation__Pos);
+                    candle.appendChild(flame);
+                    temple.appendChild(candle);
+                }
+            </script>
             <a-sky 
                 color="#181414">
             </a-sky>
         </a-scene>
-        <script src="setup.js"></script>
     </body>
 </html>
