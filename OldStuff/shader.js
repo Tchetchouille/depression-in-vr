@@ -8,7 +8,8 @@ lightTest.setAttribute('position', {x: 1, y: 1.5, z: 0});
 lightTest.setAttribute('rotation', {x: -90, y: 0, z: 0});
 document.getElementById("temple").appendChild(lightTest);
 
-
+// Faire un array pour les lumières
+// Regarder ce qu'est un dot product
 
 const toonShaderMaterial = new THREE.ShaderMaterial({
     uniforms: {
