@@ -11,58 +11,37 @@
         <!--SCENE-->
         <a-scene id="initialScene">
             <a-assets>
-                <a-asset-item id="cliffAsset" src="/assets/gltf/CliffClosedFinal.gltf"></a-asset-item>
             </a-assets>
-            <!--CAMERA AND PLAYERHEAD-->
-            <a-entity id="playerCam"
-                camera=""
-                wasd-controls=""
-                look-controls=""
-                position="0 1.6 2" rotation="" 
-                aframe-injected="" 
-                data-aframe-inspector-original-camera=""
+            <!--CAMERA-->
+            <a-entity id="rig" 
+                position="0 1.6 0"
             >
-                <a-box id="playerHead"
-                    color="#456456"
-                    scale="0.5 0.5 0.5"
-                    reflected
+                <a-entity id="camera" 
+                    camera 
+                    look-controls
                 >
-                </a-box>
+                </a-entity>
             </a-entity>
-            <a-entity id="cliff"
-                gltf-model="#cliffAsset"
-                reflected
-            >
-            </a-entity>
-            <!--MIRROR-->
-            <a-entity id="mirrorFrame">
-                <a-box
-                    position="0 0 0" rotation="0 0 0" scale="1.2 0.2 0.4"
-                    color="#0f0f0f"
-                >
-                </a-box>
-                <a-box
-                    position="0 2 0" rotation="0 0 0" scale="1.2 0.2 0.4"
-                    color="#0f0f0f"
-                >
-                </a-box>
-                <a-box
-                    position="-0.5 1 0" rotation="0 0 0" scale="0.2 2 0.4"
-                    color="#0f0f0f"
-                >
-                </a-box>
-                <a-box
-                    position="0.5 1 0" rotation="0 0 0" scale="0.2 2 0.4"
-                    color="#0f0f0f"
-                >
-                </a-box>
-            </a-entity>
-            <a-sky color="#ECECEC"></a-sky>
-            <a-entity id="mirrorRef"
-                position="0 0 0" rotation="0 180 0" scale="-1 1 1"
+            <!--ROOM-->
+            <a-plane id="floor"
+                position="0 0 -4" rotation="-90 0 0" 
+                width="40" height="40" 
+                color="#e8e0d4"
+            ></a-plane>
+            <!--FURNITURE--> 
+            <a-entity id="desk"
             >
             </a-entity>
+            <a-entity id="chair"
+            >
+            </a-entity>
+            <a-entity id="bed"
+            >
+            </a-entity>
+            <a-entity id="desk"
+            >
+            </a-entity>
+            <a-sky color="#2986cc"></a-sky>
         </a-scene>
-        <script src="components.js"></script>
     </body>
 </html>
