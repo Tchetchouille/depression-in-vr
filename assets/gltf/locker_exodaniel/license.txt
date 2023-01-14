@@ -1,0 +1,11 @@
+Model Information:
+* title:	Low-Poly Simple Two-Door Locker
+* source:	https://sketchfab.com/3d-models/low-poly-simple-two-door-locker-f1d799940db24c4b8a0359de1f5b4ea7
+* author:	exodaniel (https://sketchfab.com/exodaniel)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Low-Poly Simple Two-Door Locker" (https://sketchfab.com/3d-models/low-poly-simple-two-door-locker-f1d799940db24c4b8a0359de1f5b4ea7) by exodaniel (https://sketchfab.com/exodaniel) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
