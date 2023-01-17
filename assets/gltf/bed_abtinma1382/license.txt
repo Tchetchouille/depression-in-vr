@@ -1,0 +1,11 @@
+Model Information:
+* title:	Bed (IKEA)
+* source:	https://sketchfab.com/3d-models/bed-ikea-18e58d1b1ce84f9787f140a7667e2215
+* author:	abtinma1382 (https://sketchfab.com/abtinma1382)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Bed (IKEA)" (https://sketchfab.com/3d-models/bed-ikea-18e58d1b1ce84f9787f140a7667e2215) by abtinma1382 (https://sketchfab.com/abtinma1382) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
