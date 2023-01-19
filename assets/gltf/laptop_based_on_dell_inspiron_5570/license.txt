@@ -1,0 +1,11 @@
+Model Information:
+* title:	Laptop (Based on Dell Inspiron 5570)
+* source:	https://sketchfab.com/3d-models/laptop-based-on-dell-inspiron-5570-dbdf722060314fc5adadfb682259bb31
+* author:	ElCid1945 (https://sketchfab.com/Elcid1945)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Laptop (Based on Dell Inspiron 5570)" (https://sketchfab.com/3d-models/laptop-based-on-dell-inspiron-5570-dbdf722060314fc5adadfb682259bb31) by ElCid1945 (https://sketchfab.com/Elcid1945) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
