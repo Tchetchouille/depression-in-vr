@@ -164,6 +164,7 @@
                     //We had a texture to the frames
                     //Image by jannoon028 on Freepik 
                     windowFrame[i].setAttribute('material', {src: "#woodTexture",normalMap: "#woodNormal" , repeat: "0.05 1"});
+                    windowFrame[i].setAttribute('color', "#68553e");
                     //And the ability to receive shadows
                     windowFrame[i].setAttribute('shadow', {cast: true, receive: true});
                 }
@@ -187,33 +188,40 @@
                 gltf-model="#bedAsset" resize="x: 0.5; y: 1; z: 0.7"
                 scale="2.2 1 1" position="-0.44 0 1.75" rotation="0 -92 0"
                 shadow="cast: true; receive: true"
-                evolution="
-                    evImportance: 
-                    10, 10, 10, 10;
-                    evScore: 
-                    00, 00, 00, 00;
-                    evWindowStart: 
-                    00, 25, 50, 75;
-                    evWindowEnd:
-                    30, 55, 80, 99
-                "
             >
             </a-entity>
             <a-entity id="desk"
-                gltf-model="#deskAsset" resize="x: 0.06; y: 0.14; z: 0.04"
-                scale="0.75 0.75 1.2" position="1.4 0 0"
-                shadow="cast: true; receive: true"
-                evolution="
-                    evImportance: 
-                    10, 10, 10, 10;
-                    evScore: 
-                    00, 00, 00, 00;
-                    evWindowStart: 
-                    00, 25, 50, 75;
-                    evWindowEnd:
-                    30, 55, 80, 99
-                "
             >
+                <a-box 
+                    scale="0.75 0.05 1.4" position="1.4 0.75 0"
+                    color="#212121" material="src: #woodTexture; normalMap: #woodNormal"
+                    shadow="cast: true; receive: true"
+                >
+                </a-box>
+                <a-box
+                    scale="0.04 0.74 0.04" position="1.1 0.37 -0.65"
+                    color="#000" roughness="0.9"
+                    shadow="cast: true; receive: true"
+                >
+                </a-box>
+                <a-box
+                    scale="0.04 0.74 0.04" position="1.7 0.37 -0.65"
+                    color="#000" roughness="0.9"
+                    shadow="cast: true; receive: true"
+                >
+                </a-box>
+                <a-box
+                    scale="0.04 0.74 0.04" position="1.1 0.37 0.65"
+                    color="#000" roughness="0.9"
+                    shadow="cast: true; receive: true"
+                >
+                </a-box>
+                <a-box
+                    scale="0.04 0.74 0.04" position="1.7 0.37 0.65"
+                    color="#000" roughness="0.9"
+                    shadow="cast: true; receive: true"
+                >
+                </a-box>
             </a-entity>
             <a-entity id="laptop"
             gltf-model="#laptopAsset" resize="x: 0.0015; y: 0.0015; z: 0.0015"
@@ -221,6 +229,31 @@
             shadow="cast: true"
             >
             </a-entity>
+            <a-entity id="stool"
+            >
+                
+            </a-entity>
+            <a-box id="bedsideTable"
+                scale="0.5 0.6 0.6" position="-0.3 0.3 0.35"
+                color="#212121" material="src: #woodTexture; normalMap: #woodNormal"
+                shadow="cast: true; receive: true"
+            >
+                <a-box
+                    scale="1 0.1 1.05" position="0 0.55 0.025"
+                    color="#212121" material="src: #woodTexture; normalMap: #woodNormal"
+                >
+                </a-box>
+                <a-box
+                    scale="1 0.35 0.05" position="0 0.2 0.525"
+                    color="#212121" material="src: #woodTexture; normalMap: #woodNormal"
+                >
+                </a-box>
+                <a-box
+                    scale="1 0.35 0.05" position="0 -0.2 0.525"
+                    color="#212121" material="src: #woodTexture; normalMap: #woodNormal"
+                >
+                </a-box>
+            </a-box>
             <a-entity id="closet"
                 gltf-model="#closetAsset" resize="x: 1.07; y: 0.33; z: 0.52"
                 scale="0.6 1.9 0.85" position="-1.5 0 -1"
@@ -293,7 +326,7 @@
                 rotation="10 0 0"
             >
                 <a-entity id="sunlight"
-                    light="type: directional; color: #fff9e6; intensity: 0.1; castShadow: true; shadowBias: -0.00015"
+                    light="type: directional; color: #fff9e6; intensity: 0.1; castShadow: true; shadowBias: 0"
                     position="0 10 0" rotation="-90 0 0" 
                     target="#directionaltarget"
                     sunset
