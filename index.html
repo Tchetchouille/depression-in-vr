@@ -55,11 +55,29 @@
             </a-assets>
 
 
+            <!--CAMERA-->
+            <a-camera id="playerCam"
+                camera="active: true" look-controls
+                position="0 1.6 0"
+            >
+                <a-cursor
+                    raycaster="objects: .evolving"
+                >
+                </a-cursor>
+                <a-entity 
+                    geometry="primitive: circle; radius: 0.001" position="0 0 -0.01"
+                    material="color: gray; opacity: 0.5"
+                >
+                </a-entity>
+            </a-camera>
+
+
             <!--SCENE REFERENCE-->
             <!--Allows to move and rotate the whole scene easily-->
             <a-entity id="sceneRef"
                 position="0 0 0.75" rotation="0 90 0"
             >
+                
 
                 <!--ROOM SETUP-->
                 <script>
@@ -209,6 +227,12 @@
                         scale="0.75 0.05 1.4" position="1.4 0.75 0"
                         color="#212121" material="src: #woodTexture; normalMap: #woodNormal"
                         shadow="cast: true; receive: true"
+                        evolving="
+                            evImportances: 10 10 10;
+                            evScores: 10 10 10;
+                            evWindowStarts: 10 10 10;
+                            evWindowEnds: 10 10 10;
+                        "
                     >
                     </a-box>
                     <a-box
@@ -435,7 +459,7 @@
 
 
         <!--SCRIPTS-->
-        <script src="components/evolution.js"></script>
+        <script src="components/evolving.js"></script>
         <script src="components/resize.js"></script>
         <script src="components/sunset.js"></script>
 
