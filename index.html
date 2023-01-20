@@ -34,6 +34,9 @@
                 <a-asset-item id="curtainsAsset" src="/assets/gltf/curtain_flannel/scene.gltf"></a-asset-item>
                 <!--"Laptop (Based on Dell Inspiron 5570)" (https://skfb.ly/6RuLq) by ElCid1945 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).-->
                 <a-asset-item id="laptopAsset" src="/assets/gltf/laptop_based_on_dell_inspiron_5570/scene.gltf"></a-asset-item>
+                <!--"Smartphone Lowpoly" (https://skfb.ly/o7oGQ) by gaelinix is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).-->
+                <a-asset-item id="phoneAsset" src="/assets/gltf/smartphone_lowpoly/scene.gltf"></a-asset-item>
+
 
                 <!--TEXTURES-->
                 <!--Made by Lennart Demes https://ambientcg.com/view?id=Concrete031-->
@@ -49,340 +52,378 @@
             </a-assets>
 
 
-            <!--ROOM SETUP-->
-            <script>
-                //The room is based on a room from the Vortex appartment complex
-                //The room in question can be seen here : https://www.youtube.com/watch?v=OzmulU_59QY
-                //I tried not to include peronnal items from the person shooting the video, anly what is part of the Vortex room
-
-                let scene = document.getElementById('scene');
-
-                // --- DIMENSIONS ---
-
-                //I decided to put all the dimensions here for easier access.
-
-                //Allows for an easy modification of the room dimensions
-                let roomDimensions = {x: 3.6, y: 2.7, z: 5};
-                //Position of the player (and chair) relative to the room.
-                let offset = {x: 0, y: 0, z: 0};
-
-                //Dimensions of the windows frames
-                let frameDimensions = {x: 0.2, z: 0.1};
-                let rodsDimensions = {x: roomDimensions.x, y: 0.55, z: 0.55};
-
-                //Dimensions of the balcony
-                let balconyDimensions = {x: roomDimensions + 2, z: 1.5}
-
-                // --- WALLS ---
-
-                //This array will contain the 6 planes needed for a room
-                let room = [];
-
-                for(i=0;i<6;i++){
-                    room[i] = document.createElement("a-plane");
-
-                    //We want the walls to be able to recieve shadows
-                    room[i].setAttribute("shadow", {receive: true});
-                }
-
-                //Gives each plane its width
-                room[0].setAttribute("width", roomDimensions.x);
-                room[1].setAttribute("width", roomDimensions.x);
-                room[2].setAttribute("width", roomDimensions.z);
-                room[3].setAttribute("width", roomDimensions.z);
-                room[4].setAttribute("width", roomDimensions.y);
-                room[5].setAttribute("width", roomDimensions.y);
-                //Gives each plane its height
-                room[0].setAttribute("height", roomDimensions.z);
-                room[1].setAttribute("height", roomDimensions.z);
-                room[2].setAttribute("height", roomDimensions.y);
-                room[3].setAttribute("height", roomDimensions.y);
-                room[4].setAttribute("height", roomDimensions.x);
-                room[5].setAttribute("height", roomDimensions.x);
-
-                //We position each plane in such a way that it makes a room.
-                //The offset allows us to have the player at the origin
-                room[0].setAttribute("position", {x: offset.x, y: offset.y, z: offset.z});
-                room[1].setAttribute("position", {x: offset.x, y: offset.y + roomDimensions.y, z: offset.z});
-                room[2].setAttribute("position", {x: offset.x - roomDimensions.x/2, y: offset.y + roomDimensions.y/2, z: offset.z});
-                room[3].setAttribute("position", {x: offset.x + roomDimensions.x/2, y: offset.y + roomDimensions.y/2, z: offset.z});
-                room[4].setAttribute("position", {x: offset.x, y: offset.y + roomDimensions.y/2, z: offset.z - roomDimensions.z/2});
-                room[5].setAttribute("position", {x: offset.x, y: offset.y + roomDimensions.y/2, z: offset.z + roomDimensions.z/2});
-
-                //We rotate each plane in such a way that it makes a room.
-                room[0].setAttribute("rotation", {x: -90, y: 0, z: 0});
-                room[1].setAttribute("rotation", {x: 90, y: 180, z: 0});
-                room[2].setAttribute("rotation", {x: 0, y: 90, z: 0});
-                room[3].setAttribute("rotation", {x: 0, y: -90, z: 0});
-                room[4].setAttribute("rotation", {x: 0, y: 0, z: 90});
-                room[5].setAttribute("rotation", {x: 0, y: 180, z: 90});
-
-                //Some of the walls are not painted and so we give them a concrete texture. The floor has a different texture too
-                room[0].setAttribute("material", { src: "/assets/textures/woodFloor/WoodFloor051_1K_Color.jpg", ambientOcclusionMap: "/assets/textures/woodFloor/WoodFloor051_1K_AmbientOcclusion.jpg", normalMap: "/assets/textures/woodFloor/WoodFloor051_1K_NormalDX.jpg"});
-                room[1].setAttribute("material", { src: "#concreteTexture", ambientOcclusionMap: "#concreteOcclusion", normalMap: "#concreteNormal", repeat: {x: roomDimensions.x/3, y: roomDimensions.z/3}});
-                room[2].setAttribute("material", { src: "#concreteTexture", ambientOcclusionMap: "#concreteOcclusion", normalMap: "#concreteNormal", repeat: {x: roomDimensions.z/3, y: roomDimensions.y/3}});
-
-
-                //Finally we add the planes to the room
-                //I didn't add the last wall (the windows) for easier light manipulation. I left it in the code however, as I might still use it later.
-                for(i=0;i<5;i++){
-                    scene.appendChild(room[i]);
-                }
-
-
-                // --- WINDOWS ---
-
-                //The windows have a frame made of several boxes
-                let windowFrame = [];
-
-                //The backward wall is a special case because of the windows. We make it transparent.
-                room[5].setAttribute('transparency', true);
-                room[5].setAttribute('opacity', 0.3);
-
-                //The curtains rods are part of a box-like structure 
-                rods = document.createElement("a-box");
-                rods.setAttribute('scale', {x: rodsDimensions.x, y: rodsDimensions.y, z: rodsDimensions.z});
-                rods.setAttribute('position', {x: 0, y: roomDimensions.y - rodsDimensions.y/2, z: roomDimensions.z/2 - rodsDimensions.z/2});
-                rods.setAttribute('shadow', {cast: true, receive: true});
-                let rails = document.createElement("a-box");
-                rails.setAttribute('scale', {x: 1, y: 0.05, z: 0.01});
-                rails.setAttribute('position', {x: 0, y: -0.5, z: 0});
-                rails.setAttribute('color', "#444444");
-                rods.appendChild(rails);
-
-                //We create the frames
-                for(i=0;i<5;i++){
-                    windowFrame[i] = document.createElement("a-box");
-                    //Two of the frames are horizontal. Three are vertical. 
-                    if(i % 2 != 0){
-                        windowFrame[i].setAttribute('scale', {x: frameDimensions.x, y: roomDimensions.x, z: frameDimensions.z});
-                        windowFrame[i].setAttribute('rotation', {x: 0, y: 0, z: 90});
-                    }
-                    else{
-                        windowFrame[i].setAttribute('scale', {x: frameDimensions.x, y: roomDimensions.y - frameDimensions.x - rodsDimensions.y, z: frameDimensions.z});
-                    }
-                    //We had a texture to the frames
-                    //Image by jannoon028 on Freepik 
-                    windowFrame[i].setAttribute('material', {src: "#woodTexture",normalMap: "#woodNormal" , repeat: "0.05 1"});
-                    windowFrame[i].setAttribute('color', "#68553e");
-                    //And the ability to receive shadows
-                    windowFrame[i].setAttribute('shadow', {cast: true, receive: true});
-                }
-
-                //We position the different frames
-                windowFrame[1].setAttribute('position', {x: offset.x, y: offset.y, z: offset.z + roomDimensions.z/2});
-                windowFrame[3].setAttribute('position', {x: offset.x, y: offset.y + roomDimensions.y - rodsDimensions.y, z: offset.z + roomDimensions.z/2});
-                windowFrame[0].setAttribute('position', {x: offset.x + frameDimensions.x, y: offset.y + roomDimensions.y/2 - rodsDimensions.y/2, z: offset.z + roomDimensions.z/2});
-                windowFrame[2].setAttribute('position', {x: offset.x - roomDimensions.x/2 + frameDimensions.x/2, y: offset.y + roomDimensions.y/2 - rodsDimensions.y/2, z: offset.z + roomDimensions.z/2});
-                windowFrame[4].setAttribute('position', {x: offset.x + roomDimensions.x/2 - frameDimensions.x/2, y: offset.y + roomDimensions.y/2 - rodsDimensions.y/2, z: offset.z + roomDimensions.z/2});
-
-                //Finally we add the frames and the rods to the room
-                for(i=0;i<5;i++){
-                    scene.appendChild(windowFrame[i]);
-                }
-                scene.appendChild(rods);
-            </script>
-
-            <!--FURNITURES--> 
-            <a-entity id="bed"
-                gltf-model="#bedAsset" resize="x: 0.5; y: 1; z: 0.7"
-                scale="2.2 1 1" position="-0.44 0 1.75" rotation="0 -92 0"
-                shadow="cast: true; receive: true"
-            >
-            </a-entity>
-            <a-entity id="desk"
-            >
-                <a-box 
-                    scale="0.75 0.05 1.4" position="1.4 0.75 0"
-                    color="#212121" material="src: #woodTexture; normalMap: #woodNormal"
-                    shadow="cast: true; receive: true"
-                >
-                </a-box>
-                <a-box
-                    scale="0.04 0.74 0.04" position="1.1 0.37 -0.65"
-                    color="#000" roughness="0.9"
-                    shadow="cast: true; receive: true"
-                >
-                </a-box>
-                <a-box
-                    scale="0.04 0.74 0.04" position="1.7 0.37 -0.65"
-                    color="#000" roughness="0.9"
-                    shadow="cast: true; receive: true"
-                >
-                </a-box>
-                <a-box
-                    scale="0.04 0.74 0.04" position="1.1 0.37 0.65"
-                    color="#000" roughness="0.9"
-                    shadow="cast: true; receive: true"
-                >
-                </a-box>
-                <a-box
-                    scale="0.04 0.74 0.04" position="1.7 0.37 0.65"
-                    color="#000" roughness="0.9"
-                    shadow="cast: true; receive: true"
-                >
-                </a-box>
-            </a-entity>
-            <a-entity id="laptop"
-                gltf-model="#laptopAsset" resize="x: 0.0015; y: 0.0015; z: 0.0015"
-                position="1.65 0.67 -0.25" rotation="0 -90 0"
-            >
-            </a-entity>
-            <a-plane id="screenLight"
-                width="0.52" height="0.29" position="1.67 0.96 0.0255" rotation="-24 -90 0"
-                emissive="#cfe2f3" intensity="1"
-                opacity="0.2"
-            >
-            </a-plane>
-            <a-plane id="screen"
-                width="0.52" height="0.29" position="1.67 0.96 0.0255" rotation="-24 -90 0"
-                material="src: #woodTexture"
-                opacity="1"
-            >
-            </a-plane>
-            <a-entity id="stool"
+            <!--SCENE REFERENCE-->
+            <!--Allows to move and rotate the whole scene easily-->
+            <a-entity id="sceneRef"
+                position="0 0 0.75" rotation="0 90 0"
             >
 
-            </a-entity>
-            <a-box id="bedsideTable"
-                scale="0.5 0.6 0.6" position="-0.3 0.3 0.35"
-                color="#212121" material="src: #woodTexture; normalMap: #woodNormal"
-                shadow="cast: true; receive: true"
-            >
-                <a-box
-                    scale="1 0.1 1.05" position="0 0.55 0.025"
-                    color="#212121" material="src: #woodTexture; normalMap: #woodNormal"
-                >
-                </a-box>
-                <a-box
-                    scale="1 0.35 0.05" position="0 0.2 0.525"
-                    color="#212121" material="src: #woodTexture; normalMap: #woodNormal"
-                >
-                </a-box>
-                <a-box
-                    scale="1 0.35 0.05" position="0 -0.2 0.525"
-                    color="#212121" material="src: #woodTexture; normalMap: #woodNormal"
-                >
-                </a-box>
-            </a-box>
-            <a-entity id="closet"
-                gltf-model="#closetAsset" resize="x: 1.07; y: 0.33; z: 0.52"
-                scale="0.6 1.9 0.85" position="-1.5 0 -1"
-                shadow="cast: true; receive: true"
-            >
-            </a-entity>
-            <a-entity id="roomDoor"
-                gltf-model="#doorAsset" resize="x: 0.01; y: 0.005; z: 0.05"
-                scale="-1 2 0.2" position="1.1 0 -2.56"
-                shadow="receive: true"
-            >
-            </a-entity>
-            <a-entity id="bathroomDoor"
-                gltf-model="#doorAsset" resize="x: 0.01; y: 0.005; z: 0.05"
-                scale="1 2 0.2" position="-0.1 0 -2.56"
-                shadow="receive: true"
-            >
-            </a-entity>
-            <a-cylinder id="lamp"
-                scale="0.2 0.1 0.2" position="0 2.7 0"
-                transparent="true" opacity="0.8"
-            >
-                <a-cylinder id="lampLight"
-                    scale="0.8 0.8 0.8"
-                    emissive="#CCC" emissiveIntensity="0.01"
-                ></a-cylinder>
-            </a-cylinder>
-            <a-entity id="curtains"
-                gltf-model="#curtainsAsset" resize="x: 0.8; y: 0.3; z: 1"
-                scale="1 2.35 1" position="1.3 1.3 2.25"
-            >
-            </a-entity>
-            <a-plane id="curtainShadow"
-                shadow="cast: true"
-                width="0.9" height="2.25" position="1.3 1.3 2.35"
-                rotation="0 180 0"
-            >
-            </a-plane>
-
-
-            <!--BALCONY-->
-            <a-plane id="balcony"
-                height="1.5" width="10" position=" 0 0 3.25" rotation="270 0 0"
-                color="#8b8b8b" roughness="0.65"
-                shadow="receive: true"
-            >
-            </a-plane>
-            <a-cylinder id="handrail"
-                scale="0.05 10 0.05" position="0 1 4" rotation="0 0 90"
-                color="#444444" roughness="0.9"
-                shadow="cast: true"
-            >
+                <!--ROOM SETUP-->
                 <script>
-                    let pillar
-                    for(i=0;i<12;i++){
-                        pillar = document.createElement('a-plane');
-                        pillar.setAttribute("width", 0.05);
-                        pillar.setAttribute("height", 1);
-                        pillar.setAttribute("position", {x: -4 + i/2, y: 0.5, z: 4});
-                        pillar.setAttribute("rotation", {x: 0, y: 180, z: 0});
-                        pillar.setAttribute("color", "#444444");
-                        pillar.setAttribute("shadow", {cast: true});
-                        document.getElementById("scene").appendChild(pillar);
-                    }
-                </script>
-            </a-cylinder>
+                    //The room is based on a room from the Vortex appartment complex
+                    //The room in question can be seen here : https://www.youtube.com/watch?v=OzmulU_59QY
+                    //I tried not to include peronnal items from the person shooting the video, anly what is part of the Vortex room
 
-            <!--LIGHTING-->
-            <a-entity id="sunlightParent"
-                rotation="10 0 0"
-            >
-                <a-entity id="sunlight"
-                    light="type: directional; color: #fff9e6; intensity: 0.1; castShadow: true; shadowBias: 0"
-                    position="0 10 0" rotation="-90 0 0" 
-                    target="#directionaltarget"
-                    sunset
+                    let scene = document.getElementById('sceneRef');
+
+                    // --- DIMENSIONS ---
+
+                    //I decided to put all the dimensions here for easier access.
+
+                    //Allows for an easy modification of the room dimensions
+                    let roomDimensions = {x: 3.6, y: 2.7, z: 5};
+
+                    //Dimensions of the windows frames
+                    let frameDimensions = {x: 0.2, z: 0.1};
+                    let rodsDimensions = {x: roomDimensions.x, y: 0.55, z: 0.55};
+
+                    //Dimensions of the balcony
+                    let balconyDimensions = {x: roomDimensions + 2, z: 1.5}
+
+                    // --- WALLS ---
+
+                    //This array will contain the 6 planes needed for a room
+                    let room = [];
+
+                    for(i=0;i<6;i++){
+                        room[i] = document.createElement("a-plane");
+
+                        //We want the walls to be able to recieve shadows
+                        room[i].setAttribute("shadow", {receive: true});
+                    }
+
+                    //Gives each plane its width
+                    room[0].setAttribute("width", roomDimensions.x);
+                    room[1].setAttribute("width", roomDimensions.x);
+                    room[2].setAttribute("width", roomDimensions.z);
+                    room[3].setAttribute("width", roomDimensions.z);
+                    room[4].setAttribute("width", roomDimensions.y);
+                    room[5].setAttribute("width", roomDimensions.y);
+                    //Gives each plane its height
+                    room[0].setAttribute("height", roomDimensions.z);
+                    room[1].setAttribute("height", roomDimensions.z);
+                    room[2].setAttribute("height", roomDimensions.y);
+                    room[3].setAttribute("height", roomDimensions.y);
+                    room[4].setAttribute("height", roomDimensions.x);
+                    room[5].setAttribute("height", roomDimensions.x);
+
+                    //We position each plane in such a way that it makes a room.
+                    room[0].setAttribute("position", {x: 0, y: 0, z: 0});
+                    room[1].setAttribute("position", {x: 0, y: 0 + roomDimensions.y, z: 0});
+                    room[2].setAttribute("position", {x: -roomDimensions.x/2, y: 0 + roomDimensions.y/2, z: 0});
+                    room[3].setAttribute("position", {x: roomDimensions.x/2, y: 0 + roomDimensions.y/2, z: 0});
+                    room[4].setAttribute("position", {x: 0, y: 0 + roomDimensions.y/2, z: -roomDimensions.z/2});
+                    room[5].setAttribute("position", {x: 0, y: 0 + roomDimensions.y/2, z: roomDimensions.z/2});
+
+                    //We rotate each plane in such a way that it makes a room.
+                    room[0].setAttribute("rotation", {x: -90, y: 0, z: 0});
+                    room[1].setAttribute("rotation", {x: 90, y: 180, z: 0});
+                    room[2].setAttribute("rotation", {x: 0, y: 90, z: 0});
+                    room[3].setAttribute("rotation", {x: 0, y: -90, z: 0});
+                    room[4].setAttribute("rotation", {x: 0, y: 0, z: 90});
+                    room[5].setAttribute("rotation", {x: 0, y: 180, z: 90});
+
+                    //Some of the walls are not painted and so we give them a concrete texture. The floor has a different texture too
+                    room[0].setAttribute("material", { src: "/assets/textures/woodFloor/WoodFloor051_1K_Color.jpg", ambientOcclusionMap: "/assets/textures/woodFloor/WoodFloor051_1K_AmbientOcclusion.jpg", normalMap: "/assets/textures/woodFloor/WoodFloor051_1K_NormalDX.jpg"});
+                    room[1].setAttribute("material", { src: "#concreteTexture", ambientOcclusionMap: "#concreteOcclusion", normalMap: "#concreteNormal", repeat: {x: roomDimensions.x/3, y: roomDimensions.z/3}});
+                    room[2].setAttribute("material", { src: "#concreteTexture", ambientOcclusionMap: "#concreteOcclusion", normalMap: "#concreteNormal", repeat: {x: roomDimensions.z/3, y: roomDimensions.y/3}});
+
+
+                    //Finally we add the planes to the room
+                    //I didn't add the last wall (the windows) for easier light manipulation. I left it in the code however, as I might still use it later.
+                    for(i=0;i<5;i++){
+                        scene.appendChild(room[i]);
+                    }
+
+
+                    // --- WINDOWS ---
+
+                    //The windows have a frame made of several boxes
+                    let windowFrame = [];
+
+                    //The backward wall is a special case because of the windows. We make it transparent.
+                    room[5].setAttribute('transparency', true);
+                    room[5].setAttribute('opacity', 0.3);
+
+                    //The curtains rods are part of a box-like structure 
+                    rods = document.createElement("a-box");
+                    rods.setAttribute('scale', {x: rodsDimensions.x, y: rodsDimensions.y, z: rodsDimensions.z});
+                    rods.setAttribute('position', {x: 0, y: roomDimensions.y - rodsDimensions.y/2, z: roomDimensions.z/2 - rodsDimensions.z/2});
+                    rods.setAttribute('shadow', {cast: true, receive: true});
+                    let rails = document.createElement("a-box");
+                    rails.setAttribute('scale', {x: 1, y: 0.05, z: 0.01});
+                    rails.setAttribute('position', {x: 0, y: -0.5, z: 0});
+                    rails.setAttribute('color', "#444444");
+                    rods.appendChild(rails);
+
+                    //We create the frames
+                    for(i=0;i<5;i++){
+                        windowFrame[i] = document.createElement("a-box");
+                        //Two of the frames are horizontal. Three are vertical. 
+                        if(i % 2 != 0){
+                            windowFrame[i].setAttribute('scale', {x: frameDimensions.x, y: roomDimensions.x, z: frameDimensions.z});
+                            windowFrame[i].setAttribute('rotation', {x: 0, y: 0, z: 90});
+                        }
+                        else{
+                            windowFrame[i].setAttribute('scale', {x: frameDimensions.x, y: roomDimensions.y - frameDimensions.x - rodsDimensions.y, z: frameDimensions.z});
+                        }
+                        //We had a texture to the frames
+                        //Image by jannoon028 on Freepik 
+                        windowFrame[i].setAttribute('material', {src: "#woodTexture",normalMap: "#woodNormal" , repeat: "0.05 1"});
+                        windowFrame[i].setAttribute('color', "#68553e");
+                        //And the ability to receive shadows
+                        windowFrame[i].setAttribute('shadow', {cast: true, receive: true});
+                    }
+
+                    //We position the different frames
+                    windowFrame[1].setAttribute('position', {x: 0, y: 0, z: roomDimensions.z/2});
+                    windowFrame[3].setAttribute('position', {x: 0, y: roomDimensions.y - rodsDimensions.y, z: roomDimensions.z/2});
+                    windowFrame[0].setAttribute('position', {x: frameDimensions.x, y: roomDimensions.y/2 - rodsDimensions.y/2, z: roomDimensions.z/2});
+                    windowFrame[2].setAttribute('position', {x: -roomDimensions.x/2 + frameDimensions.x/2, y: roomDimensions.y/2 - rodsDimensions.y/2, z: roomDimensions.z/2});
+                    windowFrame[4].setAttribute('position', {x: roomDimensions.x/2 - frameDimensions.x/2, y: roomDimensions.y/2 - rodsDimensions.y/2, z: roomDimensions.z/2});
+
+                    //Finally we add the frames and the rods to the room
+                    for(i=0;i<5;i++){
+                        scene.appendChild(windowFrame[i]);
+                    }
+                    scene.appendChild(rods);
+                </script>
+
+                <!--FURNITURES--> 
+                <a-entity id="bed"
+                    gltf-model="#bedAsset" resize="x: 0.5; y: 1; z: 0.7"
+                    scale="2.2 1 1" position="-0.44 0 1.75" rotation="0 -92 0"
+                    shadow="cast: true; receive: true"
                 >
-                    <a-entity id="directionaltarget" 
-                        position="0 0 0"
+                </a-entity>
+                <a-entity id="desk"
+                >
+                    <a-box 
+                        scale="0.75 0.05 1.4" position="1.4 0.75 0"
+                        color="#212121" material="src: #woodTexture; normalMap: #woodNormal"
+                        shadow="cast: true; receive: true"
                     >
+                    </a-box>
+                    <a-box
+                        scale="0.04 0.74 0.04" position="1.1 0.37 -0.65"
+                        color="#000" roughness="0.9"
+                        shadow="cast: true; receive: true"
+                    >
+                    </a-box>
+                    <a-box
+                        scale="0.04 0.74 0.04" position="1.7 0.37 -0.65"
+                        color="#000" roughness="0.9"
+                        shadow="cast: true; receive: true"
+                    >
+                    </a-box>
+                    <a-box
+                        scale="0.04 0.74 0.04" position="1.1 0.37 0.65"
+                        color="#000" roughness="0.9"
+                        shadow="cast: true; receive: true"
+                    >
+                    </a-box>
+                    <a-box
+                        scale="0.04 0.74 0.04" position="1.7 0.37 0.65"
+                        color="#000" roughness="0.9"
+                        shadow="cast: true; receive: true"
+                    >
+                    </a-box>
+                </a-entity>
+                <a-entity id="laptop"
+                    gltf-model="#laptopAsset" resize="x: 0.0015; y: 0.0015; z: 0.0015"
+                    position="1.65 0.67 -0.25" rotation="0 -90 0"
+                >
+                </a-entity>
+                <!--While it would have been logical for the screen and screen light to be a child of the laptop,
+                trying to do so caused issues. Because of a lack of time, I opted for this less elegant solution-->
+                <a-plane id="laptopScreenLight"
+                    width="0.52" height="0.29" position="1.67 0.96 0.0255" rotation="-24 -90 0"
+                    emissive="#cfe2f3" intensity="1"
+                    opacity="0.1"
+                >
+                </a-plane>
+                <a-plane id="laptopScreen"
+                    width="0.52" height="0.29" position="1.67 0.96 0.0255" rotation="-24 -90 0"
+                    material="src: #woodTexture"
+                    opacity="1"
+                >
+                </a-plane>
+                <a-entity id="stool"
+                    position="0.60 0 0"
+                >
+                    <a-cylinder
+                        scale="0.25 0.07 0.25" position="0 0.4 0"
+                        color="#000" material="src: #metalTexture; normalMap: #metalNormal" roughness="0.2"
+                    >
+                    </a-cylinder>
+                    <a-cylinder
+                        scale="0.05 0.4 0.05" position="0 0.2 0"
+                        color="#FFF" material="src: #metalTexture; normalMap: #metalNormal" roughness="0.05"
+                    >
+                    </a-cylinder>
+                    <a-cylinder
+                        scale="0.27 0.04 0.27" position="0 0.02 0"
+                        color="#FFF" material="src: #metalTexture; normalMap: #metalNormal" roughness="0.2"
+                    >
+                    </a-cylinder>
+                </a-entity>
+                <a-box id="bedsideTable"
+                    scale="0.5 0.6 0.6" position="-0.2 0.3 0.35"
+                    color="#212121" material="src: #woodTexture; normalMap: #woodNormal"
+                    shadow="cast: true; receive: true"
+                >
+                    <a-box
+                        scale="1 0.1 1.05" position="0 0.55 0.025"
+                        color="#212121" material="src: #woodTexture; normalMap: #woodNormal"
+                    >
+                    </a-box>
+                    <a-box
+                        scale="1 0.35 0.05" position="0 0.2 0.525"
+                        color="#212121" material="src: #woodTexture; normalMap: #woodNormal"
+                    >
+                    </a-box>
+                    <a-box
+                        scale="1 0.35 0.05" position="0 -0.2 0.525"
+                        color="#212121" material="src: #woodTexture; normalMap: #woodNormal"
+                    >
+                    </a-box>
+                </a-box>
+                <a-entity id="phone"
+                    gltf-model="#phoneAsset" resize="x: 0.18; y: 0.18; z: 0.18"
+                    position="-0.2 0.65 0.2" rotation="0 -75 0"
+                >
+                </a-entity>
+                <a-plane id="phoneScreenLight"
+                    width="0.25" height="0.15" position="-0.2 0.665 0.2" rotation="-90 -75 90"
+                    emissive="#cfe2f3" intensity="1"
+                    opacity="0.1"
+                >
+                </a-plane>
+                <a-plane id="phoneScreen"
+                    width="0.25" height="0.15" position="-0.2 0.665 0.2" rotation="-90 -75 90"
+                    material="src: #woodTexture"
+                    opacity="1"
+                >
+                </a-plane>
+                <a-entity id="closet"
+                    gltf-model="#closetAsset" resize="x: 1.07; y: 0.33; z: 0.52"
+                    scale="0.6 1.9 0.85" position="-1.5 0 -1"
+                    shadow="cast: true; receive: true"
+                >
+                </a-entity>
+                <a-entity id="roomDoor"
+                    gltf-model="#doorAsset" resize="x: 0.01; y: 0.005; z: 0.05"
+                    scale="-1 2 0.2" position="1.1 0 -2.56"
+                    shadow="receive: true"
+                >
+                </a-entity>
+                <a-entity id="bathroomDoor"
+                    gltf-model="#doorAsset" resize="x: 0.01; y: 0.005; z: 0.05"
+                    scale="1 2 0.2" position="-0.1 0 -2.56"
+                    shadow="receive: true"
+                >
+                </a-entity>
+                <a-cylinder id="lamp"
+                    scale="0.2 0.1 0.2" position="0 2.7 0"
+                    transparent="true" opacity="0.8"
+                >
+                    <a-cylinder id="lampLight"
+                        scale="0.8 0.8 0.8"
+                        emissive="#CCC" emissiveIntensity="0.01"
+                    ></a-cylinder>
+                </a-cylinder>
+                <a-entity id="curtains"
+                    gltf-model="#curtainsAsset" resize="x: 0.8; y: 0.3; z: 1"
+                    scale="1 2.35 1" position="1.3 1.3 2.25"
+                >
+                </a-entity>
+                <a-plane id="curtainShadow"
+                    shadow="cast: true"
+                    width="0.9" height="2.25" position="1.3 1.3 2.35"
+                    rotation="0 180 0"
+                >
+                </a-plane>
+
+
+                <!--BALCONY-->
+                <a-plane id="balcony"
+                    height="1.5" width="10" position=" 0 0 3.25" rotation="270 0 0"
+                    color="#FFF" material="src: #concreteTexture; normalMap: #concreteNormal; repeat: 1 0.15" roughness="0.65"
+                    shadow="receive: true"
+                >
+                </a-plane>
+                <a-cylinder id="handrail"
+                    scale="0.05 10 0.05" position="0 1 4" rotation="0 0 90"
+                    color="#FFF" material="src: #metalTexture; normalMap: #metalNormal" roughness="0.5"
+                    shadow="cast: true"
+                >
+                    <script>
+                        let pillar
+                        for(i=0;i<12;i++){
+                            pillar = document.createElement('a-plane');
+                            pillar.setAttribute("width", 0.05);
+                            pillar.setAttribute("height", 1);
+                            pillar.setAttribute("position", {x: -4 + i/2, y: 0.5, z: 4});
+                            pillar.setAttribute("rotation", {x: 0, y: 180, z: 0});
+                            pillar.setAttribute("color", "#444444");
+                            pillar.setAttribute("shadow", {cast: true});
+                            document.getElementById("sceneRef").appendChild(pillar);
+                        }
+                    </script>
+                </a-cylinder>
+
+                <!--LIGHTING-->
+                <a-entity id="sunlightParent"
+                    rotation="10 0 0"
+                >
+                    <a-entity id="sunlight"
+                        light="type: directional; color: #fff9e6; intensity: 0.1; castShadow: true; shadowBias: 0"
+                        position="0 10 0" rotation="-90 0 0" 
+                        target="#directionaltarget"
+                        sunset
+                    >
+                        <a-entity id="directionaltarget" 
+                            position="0 0 0"
+                        >
+                        </a-entity>
                     </a-entity>
                 </a-entity>
+
+                <a-entity id="lampLight"
+                    light="decay: 0; intensity: 0.8; type: point; castShadow: false" 
+                    position="0 2 0"
+                    sunset
+                >
+                </a-entity>
+
+                <a-entity id="ambientLight"
+                    light="type: ambient; color: #CCC; intensity: 0.1"
+                >
+                </a-entity>
+
+                <a-entity id="screenLight"
+                    light="type: point; intensity: 0.8; distance: 8; decay: 25; color: #cfe2f3; castShadow: true"
+                    position="1 1.3 0"
+                >
+                </a-entity>
+
+
+                <!--OUTSIDE-->
+                <a-sky id="sky"
+                    color="#95baf7"
+                >
+                </a-sky>
+
+
+                <a-box id="scaleTest"
+                    scale="1 1 1"
+                    position="10 0 0"
+                    transparency="true" opacity="0.7"
+                >
+                </a-box>
+            
+
             </a-entity>
-
-            <a-entity id="lampLight"
-                light="decay: 0; intensity: 0.8; type: point; castShadow: false" 
-                position="0 2 0"
-                sunset
-            >
-            </a-entity>
-
-            <a-entity id="ambientLight"
-                light="type: ambient; color: #CCC; intensity: 0.1"
-            >
-            </a-entity>
-
-            <a-entity id="screenLight"
-                light="type: point; intensity: 0.8; distance: 8; decay: 25; color: #cfe2f3; castShadow: true"
-                position="1 1.3 0"
-            >
-            </a-entity>
-
-
-            <!--OUTSIDE-->
-            <a-sky id="sky"
-                color="#95baf7"
-            >
-            </a-sky>
-
-
-            <a-box id="scaleTest"
-                scale="1 1 1"
-                position="10 0 0"
-                transparency="true" opacity="0.7"
-            >
-            </a-box>
-
-
         </a-scene>
 
 
