@@ -41,14 +41,17 @@
                 <!--TEXTURES-->
                 <!--Made by Lennart Demes https://ambientcg.com/view?id=Concrete031-->
                 <img id="concreteTexture" src="/assets/textures/concrete/Concrete031_1K_Color.jpg">
-                <img id="concreteOcclusion" src="/assets/textures/concrete/Concrete031_1K_AmbientOcclusion.jpg">
                 <img id="concreteNormal" src="/assets/textures/concrete/Concrete031_1K_NormalDX.jpg">
+                <img id="concreteOcclusion" src="/assets/textures/concrete/Concrete031_1K_AmbientOcclusion.jpg">
                 <!--Made by Lennart Demes https://ambientcg.com/view?id=Wood058-->
                 <img id="woodTexture" src="/assets/textures/wood/Wood058_1K_Color.jpg">
                 <img id="woodNormal" src="/assets/textures/wood/Wood058_1K_NormalDX.jpg">
                 <!--Made by Lennart Demes https://ambientcg.com/view?id=Metal041A-->
                 <img id="metalTexture" src="/assets/textures/metal/Metal041A_1K_Color.jpg">
                 <img id="metalNormal" src="/assets/textures/metal/Metal041A_1K_NormalDX.jpg">
+                <!--Made by Lennart Demes https://ambientcg.com/view?id=Fabric030-->
+                <img id="paintTexture" src="/assets/textures/paint/PaintedPlaster017_1K_Color.jpg">
+                <img id="paintNormal" src="/assets/textures/paint/PaintedPlaster017_1K_NormalDX.jpg">
             </a-assets>
 
 
@@ -127,6 +130,8 @@
                     room[0].setAttribute("material", { src: "/assets/textures/woodFloor/WoodFloor051_1K_Color.jpg", ambientOcclusionMap: "/assets/textures/woodFloor/WoodFloor051_1K_AmbientOcclusion.jpg", normalMap: "/assets/textures/woodFloor/WoodFloor051_1K_NormalDX.jpg"});
                     room[1].setAttribute("material", { src: "#concreteTexture", ambientOcclusionMap: "#concreteOcclusion", normalMap: "#concreteNormal", repeat: {x: roomDimensions.x/3, y: roomDimensions.z/3}});
                     room[2].setAttribute("material", { src: "#concreteTexture", ambientOcclusionMap: "#concreteOcclusion", normalMap: "#concreteNormal", repeat: {x: roomDimensions.z/3, y: roomDimensions.y/3}});
+                    room[3].setAttribute("material", { src: "#paintTexture", normalMap: "#paintNormal", repeat: {x: roomDimensions.z, y: roomDimensions.y}});
+                    room[4].setAttribute("material", { src: "#paintTexture", normalMap: "#paintNormal", repeat: {x: roomDimensions.y, y: roomDimensions.x}});
 
 
                     //Finally we add the planes to the room
@@ -150,10 +155,12 @@
                     rods.setAttribute('scale', {x: rodsDimensions.x, y: rodsDimensions.y, z: rodsDimensions.z});
                     rods.setAttribute('position', {x: 0, y: roomDimensions.y - rodsDimensions.y/2, z: roomDimensions.z/2 - rodsDimensions.z/2});
                     rods.setAttribute('shadow', {cast: true, receive: true});
+                    rods.setAttribute('roughness', 0.5);
                     let rails = document.createElement("a-box");
                     rails.setAttribute('scale', {x: 1, y: 0.05, z: 0.01});
                     rails.setAttribute('position', {x: 0, y: -0.5, z: 0});
                     rails.setAttribute('color', "#444444");
+                    rails.setAttribute('roughness', 0.1);
                     rods.appendChild(rails);
 
                     //We create the frames
