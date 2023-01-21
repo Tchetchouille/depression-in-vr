@@ -1,6 +1,8 @@
 # depression-in-vr
 ## Description
 This project is an attempt at making a VR experience about depression. The player sits at a desk in a student room. The room will change when the player is not looking to show more and more signs of depression. 
+This project is a recreation to a room from the [Vortex building](https://www.unil.ch/welcomecentre/en/home/menuinst/sinstaller-en-suisse-1/se-loger-1/vortex.html). This was made possible by the video ["Visite du Vortex"](https://www.youtube.com/watch?v=OzmulU_59QY) by Clément H. I tried not to reproduce anything that was the property of Clément H. and not part of the original Vortex room.
+
 ![](https://github.com/Tchetchouille/depression-in-vr/blob/main/depressionGif.gif)
 
 ## Installation
