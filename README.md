@@ -32,3 +32,6 @@ This project uses many assets under the CC0.
 * Ambient sound : Sound effects obtained from https://www.zapsplat.com
 
 All other assets are made by myself.
+
+## Development context
+This project was made as an evaluation for the class "Réalité Virtuelle" given by Isaac Pante (SLI, Lettres, UNIL).
