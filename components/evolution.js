@@ -1,12 +1,17 @@
-
-
-
+//Note: An element in the front will be stored in the evolvingElementsBack, as it depends on the back plane for its evolution
+//List of evolving elements in the back
 let phoneScreen = document.getElementById('phoneScreen');
 let phoneScreenData = [
+    //element
     phoneScreen,
-    [0, 10, 30], 
-    "textures", 
-    "positions"
+    //current step
+    0,
+    //time limits
+    [2, 10, 30],
+    //textures
+    ["#concreteTexture", "", ""], 
+    //sounds
+    ["", "", ""]
 ];
 
 let evolvingElementsFront = [
@@ -14,17 +19,25 @@ let evolvingElementsFront = [
 ];
 
 
+//List of evolving elements on the left
 let evolvingElementsRight = [
     "nothing"
 ];
 
 
+//List of evolving elements in the front
 let laptopScreen = document.getElementById('laptopScreen');
 let laptopScreenData = [
+    //element
     laptopScreen,
-    [0, 10, 30], 
-    "textures", 
-    "positions"
+    //current step
+    0,
+    //time limits
+    [2, 10, 30],
+    //textures
+    ["#suicideTexture", "", ""],
+    //sounds
+    ["", "", ""]
 ];
 
 let evolvingElementsBack = [
@@ -32,6 +45,7 @@ let evolvingElementsBack = [
 ];
 
 
+//List of evolving elements on the right
 let evolvingElementsLeft = [
     "nothing"
 ];
@@ -64,15 +78,41 @@ setInterval(function(){
 
 
 
-
+//For each plane
 lookReferences.forEach(function(v1, refIndex){
     
+    //We add an eventListener that allows us to know if the plane is looked at
     lookReferences[refIndex].addEventListener('mouseenter', function(){
 
+        //For each evolving element dependant on a given plane
         evolvingElements[refIndex].forEach(function(v2, elIndex){
 
-            console.log(evolvingElements[refIndex][elIndex]);
-            
+            //The evolving element
+            let evolvingElement = evolvingElements[refIndex][elIndex][0];
+
+            //We determine at what step they are depending on how much time has passed
+            //They start at 0, and everytime we look at the coresponding plane, if enough time has passed, we go to the next step
+            let step = evolvingElements[refIndex][elIndex][1];
+            let timeLimit = evolvingElements[refIndex][elIndex][2][step];
+            let texture = evolvingElements[refIndex][elIndex][3][step];
+
+            //If we go to the next step, we also apply the coresponding changes
+            if(timeLimit <= timer){
+
+                evolvingElement.setAttribute('material', {src: texture, color: "#FEA090"});
+
+                console.log(texture);
+
+                step++;
+
+                timeLimit = evolvingElements[refIndex][elIndex][2][step];
+                texture = evolvingElements[refIndex][elIndex][3][step];
+
+                console.log(evolvingElements[refIndex][elIndex][3][step]);
+                
+            }
+
+
         });
 
     });

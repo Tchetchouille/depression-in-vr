@@ -52,6 +52,14 @@
                 <!--Made by Lennart Demes https://ambientcg.com/view?id=Fabric030-->
                 <img id="paintTexture" src="/assets/textures/paint/PaintedPlaster017_1K_Color.jpg">
                 <img id="paintNormal" src="/assets/textures/paint/PaintedPlaster017_1K_NormalDX.jpg">
+
+                <!--My own textures-->
+                <img id="welcomeTexture" src="/assets/textures/laptop/welcomeUnil.png">
+                <img id="suicideTexture" src="/assets/textures/laptop/suicide.png">
+                <img id="delaiTexture" src="/assets/textures/laptop/demandeDelai.png">
+                <img id="note1Texture" src="/assets/textures/laptop/notes1.png">
+
+
             </a-assets>
 
 
@@ -62,7 +70,7 @@
             >
                 <a-entity id="vision"
                     cursor=""
-                    geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: black; shader: flat"
+                    raycaster="objects: .lookReference"
                     position="0 0 -0.2"    
                 >
                 </a-entity>
@@ -72,25 +80,25 @@
             <a-plane id="lookRight" class="lookReference"
                 position="0.25 0 0" rotation="0 270 0"
                 scale="0.5 10 1"
-                opacity="0.5"
+                opacity="0"
             >
             </a-plane>
             <a-plane id="lookBack" class="lookReference"
                 position="0 0 0.25" rotation="0 180 0"
                 scale="0.5 10 1"
-                opacity="0.5"
+                opacity="0"
             >
             </a-plane>
             <a-plane id="lookLeft" class="lookReference"
                 position="-0.25 0 0" rotation="0 90 0"
                 scale="0.5 10 1"
-                opacity="0.5"
+                opacity="0"
             >
             </a-plane>
             <a-plane id="lookFront" class="lookReference"
                 position="0 0 -0.25" rotation="0 0 0"
                 scale="0.5 10 1"
-                opacity="0.5"
+                opacity="0"
             >
             </a-plane>
 
@@ -293,7 +301,7 @@
                 </a-plane>
                 <a-plane id="laptopScreen" class="evolvingFront"
                     width="0.52" height="0.29" position="1.67 0.96 0.0255" rotation="-24 -90 0"
-                    material="src: #woodTexture"
+                    material="src: #note1Texture"
                     opacity="1"
                 >
                 </a-plane>
