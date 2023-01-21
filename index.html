@@ -4,10 +4,6 @@
     <head>
         <!--AFRAME-->
         <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-        <!--AFRAME EXTRAS-->
-        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
-        <!--SUPERHANDS-->
-        <script src="https://unpkg.com/super-hands@^3.0.3/dist/super-hands.min.js"></script>
     </head>
 
 
@@ -52,12 +48,29 @@
                 <!--Made by Lennart Demes https://ambientcg.com/view?id=Fabric030-->
                 <img id="paintTexture" src="/assets/textures/paint/PaintedPlaster017_1K_Color.jpg">
                 <img id="paintNormal" src="/assets/textures/paint/PaintedPlaster017_1K_NormalDX.jpg">
+                <!-- Image by rawpixel.com on Freepik https://www.freepik.com/free-photo/black-cracked-background-with-broken-glass-texture_17224681.htm#query=broken%20screen&position=8&from_view=search&track=sph -->
+                <img id="brokenTexture" src="/assets/textures/laptop/brokenScreen.jpg">
+                <!-- Image by DrawingMyDiary on Freepik https://www.freepik.com/free-vector/calling-screen-with-faceless-avatar-isolated-vector-illustration_16294583.htm#query=call&position=11&from_view=search&track=sph -->
+                <img id="callTexture" src="/assets/textures/phone/call.jpg">
+
 
                 <!--My own textures-->
                 <img id="welcomeTexture" src="/assets/textures/laptop/welcomeUnil.png">
                 <img id="suicideTexture" src="/assets/textures/laptop/suicide.png">
                 <img id="delaiTexture" src="/assets/textures/laptop/demandeDelai.png">
                 <img id="note1Texture" src="/assets/textures/laptop/notes1.png">
+                <img id="note2Texture" src="/assets/textures/laptop/notes1.png">
+                <img id="note3Texture" src="/assets/textures/laptop/notes1.png">
+                <img id="phone1Texture" src="/assets/textures/phone/screen1.png">
+                <img id="phone2Texture" src="/assets/textures/phone/screen2.png">
+                <img id="phone3Texture" src="/assets/textures/phone/screen3.png">
+                <img id="missedCallTexture" src="/assets/textures/phone/missedCall.png">
+
+                <!--SOUNDS-->
+                <!--“Sound effects obtained from https://www.zapsplat.com“-->
+                <audio id="notificationSound" src="assets/sounds/notification.mp3" preload="auto"></audio>
+                <audio id="ringtoneSound" src="assets/sounds/ringtone.mp3" preload="auto"></audio>
+                <audio id="voiceSound" src="assets/sounds/voice" preload="auto"></audio>
 
 
             </a-assets>
@@ -301,7 +314,7 @@
                 </a-plane>
                 <a-plane id="laptopScreen" class="evolvingFront"
                     width="0.52" height="0.29" position="1.67 0.96 0.0255" rotation="-24 -90 0"
-                    material="src: #note1Texture"
+                    material="src: #welcomeTexture"
                     opacity="1"
                 >
                 </a-plane>
@@ -345,7 +358,7 @@
                     >
                     </a-box>
                 </a-box>
-                <a-entity id="phone" class="evolvingBack"
+                <a-entity id="phone" 
                     gltf-model="#phoneAsset" resize="x: 0.18; y: 0.18; z: 0.18"
                     position="-0.2 0.65 0.2" rotation="0 -75 0"
                 >
@@ -356,10 +369,11 @@
                     opacity="0.1"
                 >
                 </a-plane>
-                <a-plane id="phoneScreen"
+                <a-plane id="phoneScreen" class="evolvingBack"
                     width="0.25" height="0.15" position="-0.2 0.665 0.2" rotation="-90 -75 90"
                     material="src: #woodTexture"
                     opacity="1"
+                    sound="src: #ringtoneSound; loop:false; autoplay: false"
                 >
                 </a-plane>
                 <a-entity id="closet"
@@ -372,6 +386,7 @@
                     gltf-model="#doorAsset" resize="x: 0.01; y: 0.005; z: 0.05"
                     scale="-1 2 0.2" position="1.1 0 -2.56"
                     shadow="receive: true"
+                    sound="src: #knockSound; loop:false; autoplay: false"
                 >
                 </a-entity>
                 <a-entity id="bathroomDoor"
@@ -428,6 +443,7 @@
                         }
                     </script>
                 </a-cylinder>
+
 
                 <!--LIGHTING-->
                 <a-entity id="sunlightParent"

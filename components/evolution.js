@@ -7,11 +7,9 @@ let phoneScreenData = [
     //current step
     0,
     //time limits
-    [2, 10, 30],
+    [0, 30, 60, 90, 120],
     //textures
-    ["#concreteTexture", "", ""], 
-    //sounds
-    ["", "", ""]
+    ["#phone1Texture", "phone2Texture", "phone3Texture", "#brokenTexture" ], 
 ];
 
 let evolvingElementsFront = [
@@ -19,7 +17,7 @@ let evolvingElementsFront = [
 ];
 
 
-//List of evolving elements on the left
+//List of evolving elements on the left. Nothing yet
 let evolvingElementsRight = [
     "nothing"
 ];
@@ -33,11 +31,9 @@ let laptopScreenData = [
     //current step
     0,
     //time limits
-    [2, 10, 30],
+    [0, 30, 60, 90, 120, 150],
     //textures
-    ["#suicideTexture", "", ""],
-    //sounds
-    ["", "", ""]
+    ["#welcomeTexture", "#note1Texture", "#delaiTexture", "#note2Texture", "#suicideTexture", "#note3texture"],
 ];
 
 let evolvingElementsBack = [
@@ -45,12 +41,12 @@ let evolvingElementsBack = [
 ];
 
 
-//List of evolving elements on the right
+//List of evolving elements on the right. Nothing yet
 let evolvingElementsLeft = [
     "nothing"
 ];
 
-
+//We group all the elements in one array
 let evolvingElements = [
     evolvingElementsFront,
     evolvingElementsRight,
@@ -58,12 +54,14 @@ let evolvingElements = [
     evolvingElementsLeft
 ];
 
-
+//These planes allow us to track where the player is looking without having to use frustum .
+//Frustums would be more elegant, precise, and efficient. Alas I didn't have the time to look into it.
 let lookFront = document.getElementById('lookFront');
 let lookRight = document.getElementById('lookRight');
 let lookBack = document.getElementById('lookBack');
 let lookLeft = document.getElementById('lookLeft');
 
+//We group the different planes in an array
 let lookReferences = [
     lookFront,
     lookRight,
@@ -71,9 +69,30 @@ let lookReferences = [
     lookLeft
 ];
 
+//How many seconds have passed since the start of the experience.
+//I also use it as a way to activate the different sound effects.
 let timer = 0;
 setInterval(function(){
     timer++;
+    console.log(timer);
+
+    switch(timer){
+        //Activating the phonecall
+        //Exceptionally, the screen texture can change even if looked at
+        case 90:
+            let phone = document.getElementById(phoneScreen);
+            //we play the ringtone
+            phone.components.sound.playSound();
+            //we change the screen texture
+            phone.setAttribute('material', {src: "#callTexture"});
+            //When the ringtone ends we change the screen texture again
+            setTimeout(function(){
+                phone.setAttribute('material', {src: "#missedCallTexture"});
+            }, 8000)
+            break;
+
+    }
+
 }, 1000);
 
 
@@ -99,16 +118,17 @@ lookReferences.forEach(function(v1, refIndex){
             //If we go to the next step, we also apply the coresponding changes
             if(timeLimit <= timer){
 
-                evolvingElement.setAttribute('material', {src: texture, color: "#FEA090"});
+                //We change the texture
+                evolvingElement.setAttribute('material', {src: texture});
 
-                console.log(texture);
-
+                //We pass to the next step
                 step++;
 
+                //And change the variables values accordingly
                 timeLimit = evolvingElements[refIndex][elIndex][2][step];
                 texture = evolvingElements[refIndex][elIndex][3][step];
 
-                console.log(evolvingElements[refIndex][elIndex][3][step]);
+                console.log(document.getElementById("phoneScreen").components);
                 
             }
 
@@ -118,27 +138,3 @@ lookReferences.forEach(function(v1, refIndex){
     });
 
 });
-
-
-
-/*
-for(i=0;i<lookReferences.length;i++){
-
-
-    //i is lost when calling the event. this allows us not to lose its value
-    let j = i;
-
-    lookReferences[i].addEventListener('mouseenter', function(){
-
-        for(k=0; k<evolvingElements[j].length;k++){
-            
-            if(evolvingElements[j][k][1] )
-
-
-        }
-
-
-    });
-}
-
-*/
