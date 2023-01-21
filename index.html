@@ -59,17 +59,21 @@
                 <img id="suicideTexture" src="/assets/textures/laptop/suicide.png">
                 <img id="delaiTexture" src="/assets/textures/laptop/demandeDelai.png">
                 <img id="note1Texture" src="/assets/textures/laptop/notes1.png">
-                <img id="note2Texture" src="/assets/textures/laptop/notes1.png">
-                <img id="note3Texture" src="/assets/textures/laptop/notes1.png">
+                <img id="note2Texture" src="/assets/textures/laptop/notes2.png">
+                <img id="note3Texture" src="/assets/textures/laptop/notes3.png">
                 <img id="phone1Texture" src="/assets/textures/phone/screen1.png">
                 <img id="phone2Texture" src="/assets/textures/phone/screen2.png">
                 <img id="phone3Texture" src="/assets/textures/phone/screen3.png">
+                <img id="phone4Texture" src="/assets/textures/phone/screen4.png">
                 <img id="missedCallTexture" src="/assets/textures/phone/missedCall.png">
 
                 <!--SOUNDS-->
                 <!--“Sound effects obtained from https://www.zapsplat.com“-->
                 <audio id="notificationSound" src="assets/sounds/notification.mp3" preload="auto"></audio>
                 <audio id="ringtoneSound" src="assets/sounds/ringtone.mp3" preload="auto"></audio>
+                <audio id="ambientSound" src="assets/sounds/ambient.mp3" preload="auto"></audio>
+
+                <!--My own sounds-->
                 <audio id="pizzaSound" src="assets/sounds/pizza.mp3" preload="auto"></audio>
                 <audio id="knockSound" src="assets/sounds/knock.mp3" preload="auto"></audio>
 
@@ -79,7 +83,7 @@
 
             <!--CAMERA-->
             <a-camera id="playerCam"
-                camera="active: true" look-controls wasd-controls
+                camera="active: true" look-controls
                 position="0 1.6 0"
             >
                 <a-entity id="vision"
@@ -88,6 +92,12 @@
                     position="0 0 -0.2"    
                 >
                 </a-entity>
+                <a-plane id="blackScreen"
+                    scale="1 1 1" position="0 0 -0.2"
+                    color="#000" shader="flat" opacity="1"
+                    animation="property: opacity; to: 0; dur: 5000"
+                >
+                </a-plane>
             </a-camera>
 
 
@@ -394,6 +404,7 @@
                     gltf-model="#doorAsset" resize="x: 0.01; y: 0.005; z: 0.05"
                     scale="1 2 0.2" position="-0.1 0 -2.56"
                     shadow="receive: true"
+                    sound="src: #ambientSound; loop: true; autoplay: true; volume: 0.2"
                 >
                 </a-entity>
                 <a-cylinder id="lamp"
@@ -485,16 +496,9 @@
                 <!--OUTSIDE-->
                 <a-sky id="sky"
                     color="#95baf7"
+                    animation="property: color; to: #854503; dur: 130000"
                 >
                 </a-sky>
-
-
-                <a-box id="scaleTest"
-                    scale="1 1 1"
-                    position="10 0 0"
-                    transparency="true" opacity="0.7"
-                >
-                </a-box>
             
 
             </a-entity>

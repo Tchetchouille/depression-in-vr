@@ -7,9 +7,9 @@ let phoneScreenData = [
     //current step
     0,
     //time limits
-    [0, 20, 50, 60, 70],
+    [0, 15, 50, 95, 105],
     //textures
-    ["#phone1Texture", "#phone2Texture", "#phone3Texture", "#brokenTexture" ], 
+    ["#phone1Texture", "#phone2Texture", "#phone3Texture", "#phone4Texture","#brokenTexture" ], 
 ];
 
 let evolvingElementsFront = [
@@ -31,9 +31,9 @@ let laptopScreenData = [
     //current step
     0,
     //time limits
-    [0, 15, 30, 45, 60, 75],
+    [0, 15, 40, 95, 105, 115],
     //textures
-    ["#welcomeTexture", "#note1Texture", "#delaiTexture", "#note2Texture", "#suicideTexture", "#note3texture"],
+    ["#welcomeTexture", "#note1Texture", "#note2Texture", "#delaiTexture", "#suicideTexture", "#note3Texture"],
 ];
 
 let evolvingElementsBack = [
@@ -93,14 +93,17 @@ setInterval(function(){
             }, 8000)
             break;
         //Same but with the knock on the door
-        case 50:
-            let door = document.getElementById('roomDoor');
-            door.components.sound.playSound();
+        case 65:
+            document.getElementById('roomDoor').components.sound.playSound();
             break;
         //Then we change the sound to the voice and play it once more
-        case 53:
-            door.setAttribute('sound', {src: "#pizzaSound"});
+        case 68:
+            document.getElementById('roomDoor').setAttribute('sound', {src: "#pizzaSound"});
             document.getElementById('roomDoor').components.sound.playSound();
+            break;
+        case 130:
+            document.getElementById('blackScreen').setAttribute('animation__fade', {property: "opacity", to: 1, dur: 5000});
+            break;
     }
 
 }, 1000);
@@ -111,7 +114,7 @@ setInterval(function(){
 lookReferences.forEach(function(v1, refIndex){
     
     //We add an eventListener that allows us to know if the plane is looked at
-    lookReferences[refIndex].addEventListener('mouseenter', function(){
+    lookReferences[refIndex].addEventListener('mouseleave', function(){
 
         //For each evolving element dependant on a given plane
         evolvingElements[refIndex].forEach(function(v2, elIndex){
