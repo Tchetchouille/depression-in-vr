@@ -13,12 +13,12 @@ You do not need any other external module, or library.
 ## Copyright
 This project uses many assets under the CC0.
 ### gltf assets
-* ["Bed (IKEA)"](https://skfb.ly/ozMVX) by abtinma1382 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
-* ["Door with frame"](https://skfb.ly/6VKAQ) by witnessk is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
-* ["Low-Poly Simple Two-Door Locker"](https://skfb.ly/orqs6) by exodaniel is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
-* ["Curtain Flannel"](https://skfb.ly/o9XK7) by lugsserg is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
-* ["Laptop (Based on Dell Inspiron 5570)"](https://skfb.ly/6RuLq) by ElCid1945 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
-* ["Smartphone Lowpoly"](https://skfb.ly/o7oGQ) by gaelinix is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+* ["Bed (IKEA)"](https://skfb.ly/ozMVX) by abtinma1382 is licensed under Creative Commons Attribution.
+* ["Door with frame"](https://skfb.ly/6VKAQ) by witnessk is licensed under Creative Commons Attribution.
+* ["Low-Poly Simple Two-Door Locker"](https://skfb.ly/orqs6) by exodaniel is licensed under Creative Commons Attribution.
+* ["Curtain Flannel"](https://skfb.ly/o9XK7) by lugsserg is licensed under Creative Commons Attribution.
+* ["Laptop (Based on Dell Inspiron 5570)"](https://skfb.ly/6RuLq) by ElCid1945 is licensed under Creative Commons Attribution.
+* ["Smartphone Lowpoly"](https://skfb.ly/o7oGQ) by gaelinix is licensed under Creative Commons Attribution.
 ### textures
 * [Concrete texture : Made by Lennart Demes](https://ambientcg.com/view?id=Concrete031)
 * [Wood texture : Made by Lennart Demes](https://ambientcg.com/view?id=Wood058)
@@ -26,3 +26,9 @@ This project uses many assets under the CC0.
 * [Paint texture : Made by Lennart Demes](https://ambientcg.com/view?id=Fabric030)
 * [Broken screen texture : Made by rawpixel.com on Freepik](https://www.freepik.com/free-photo/black-cracked-background-with-broken-glass-texture_17224681.htm#query=broken%20screen&position=8&from_view=search&track=sph)
 * [Call screen : Made by DrawingMyDiary on Freepik](https://www.freepik.com/free-vector/calling-screen-with-faceless-avatar-isolated-vector-illustration_16294583.htm#query=call&position=11&from_view=search&track=sph)
+### sounds
+* Notification sound : Sound effects obtained from https://www.zapsplat.com
+* Ringtone : Sound effects obtained from https://www.zapsplat.com
+* Ambient sound : Sound effects obtained from https://www.zapsplat.com
+
+All other assets are made by myself.
