@@ -7,9 +7,9 @@ let phoneScreenData = [
     //current step
     0,
     //time limits
-    [0, 30, 60, 90, 120],
+    [0, 20, 50, 60, 70],
     //textures
-    ["#phone1Texture", "phone2Texture", "phone3Texture", "#brokenTexture" ], 
+    ["#phone1Texture", "#phone2Texture", "#phone3Texture", "#brokenTexture" ], 
 ];
 
 let evolvingElementsFront = [
@@ -31,7 +31,7 @@ let laptopScreenData = [
     //current step
     0,
     //time limits
-    [0, 30, 60, 90, 120, 150],
+    [0, 15, 30, 45, 60, 75],
     //textures
     ["#welcomeTexture", "#note1Texture", "#delaiTexture", "#note2Texture", "#suicideTexture", "#note3texture"],
 ];
@@ -74,13 +74,15 @@ let lookReferences = [
 let timer = 0;
 setInterval(function(){
     timer++;
-    console.log(timer);
+
+    //This is very usefull to manage events
+    console.log("timer : " + timer);
 
     switch(timer){
         //Activating the phonecall
         //Exceptionally, the screen texture can change even if looked at
-        case 90:
-            let phone = document.getElementById(phoneScreen);
+        case 30:
+            let phone = document.getElementById('phoneScreen');
             //we play the ringtone
             phone.components.sound.playSound();
             //we change the screen texture
@@ -90,7 +92,15 @@ setInterval(function(){
                 phone.setAttribute('material', {src: "#missedCallTexture"});
             }, 8000)
             break;
-
+        //Same but with the knock on the door
+        case 50:
+            let door = document.getElementById('roomDoor');
+            door.components.sound.playSound();
+            break;
+        //Then we change the sound to the voice and play it once more
+        case 53:
+            door.setAttribute('sound', {src: "#pizzaSound"});
+            document.getElementById('roomDoor').components.sound.playSound();
     }
 
 }, 1000);
@@ -122,14 +132,10 @@ lookReferences.forEach(function(v1, refIndex){
                 evolvingElement.setAttribute('material', {src: texture});
 
                 //We pass to the next step
-                step++;
+                evolvingElements[refIndex][elIndex][1] += 1;
 
-                //And change the variables values accordingly
-                timeLimit = evolvingElements[refIndex][elIndex][2][step];
-                texture = evolvingElements[refIndex][elIndex][3][step];
+                console.log("texture changed to : " + texture);
 
-                console.log(document.getElementById("phoneScreen").components);
-                
             }
 
 
