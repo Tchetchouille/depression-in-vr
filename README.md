@@ -19,3 +19,10 @@ This project uses many assets under the CC0.
 * "Curtain Flannel" (https://skfb.ly/o9XK7) by lugsserg is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 * "Laptop (Based on Dell Inspiron 5570)" (https://skfb.ly/6RuLq) by ElCid1945 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 * "Smartphone Lowpoly" (https://skfb.ly/o7oGQ) by gaelinix is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+### textures
+* [Concrete texture : Made by Lennart Demes](https://ambientcg.com/view?id=Concrete031)
+* [Wood texture : Made by Lennart Demes](https://ambientcg.com/view?id=Wood058)
+* [Metal texture : Made by Lennart Demes](https://ambientcg.com/view?id=Metal041A)
+* [Paint texture : Made by Lennart Demes](https://ambientcg.com/view?id=Fabric030)
+* [Broken screen texture : Made by rawpixel.com on Freepik](https://www.freepik.com/free-photo/black-cracked-background-with-broken-glass-texture_17224681.htm#query=broken%20screen&position=8&from_view=search&track=sph)
+* [Call screen : Made by DrawingMyDiary on Freepik](https://www.freepik.com/free-vector/calling-screen-with-faceless-avatar-isolated-vector-illustration_16294583.htm#query=call&position=11&from_view=search&track=sph)
