@@ -4,6 +4,30 @@
 //We store some key values for each step of any given element
 AFRAME.registerComponent('evolving', {
     schema: {
+        transitions: {type: 'array', default: [0]},
+        step: {type:'int', default: 0}
+    },
+  
+    init: function () {
+        let data = this.data;
+
+        
+
+        //We split every data in order to have arrays
+        data.transitions = data.transitions[0].split(" ");
+
+        //We convert each string to the correct type of data
+        for(i=0;i<data.transitions.length;i++){
+            data.transitions[i] = parseInt(data.transitions[i]);
+        }
+    },
+  });
+
+
+/*
+
+AFRAME.registerComponent('evolving', {
+    schema: {
         //This score indicates how important it is that the player notices the element in the current step.
         evImportances: {type: 'array', default: [0]},
         //This score indicates how much the element has been looked at in the current step.
@@ -24,6 +48,9 @@ AFRAME.registerComponent('evolving', {
     init: function () {
         let data = this.data;
         let el = this.el;
+        let position = el.getAttribute('position');
+        //Allows us to set and clear intervals.
+        let intervID;
 
         //We split every data in order to have arrays
         data.evImportances = data.evImportances[0].split(" ");
@@ -41,21 +68,7 @@ AFRAME.registerComponent('evolving', {
             data.evWindowStarts[i] = parseInt(data.evWindowStarts[i]);
             data.evWindowEnds[i] = parseInt(data.evWindowEnds[i]);
         }
-
-        console.log(data.evImportances);
-        console.log(data.evScores);
-        console.log(data.evWindowStarts);
-        console.log(data.evWindowEnds);
-
-
-
-        //This allow for the raycaster not to check every single object, but only those with this class
-        el.setAttribute('class', "evolving");
-        //
-        el.addEventListener('mouseenter', function () {
-            data.evScores[data.evStep] += 100;
-            console.log(data.evScores);
-          });
-    }
+    },
   });
 
+  */
