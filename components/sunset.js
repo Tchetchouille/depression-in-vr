@@ -2,7 +2,8 @@
 AFRAME.registerComponent('sunset', {  
     init: function () {
         //Duration of the animation in minutes
-        let aDuration =   130 * 1000;
+        let aDuration =  globalActualDuration * 1000;
+        console.log(globalActualDuration);
         
         if(this.el.id == "sunlight"){
             this.el.setAttribute('animation__intensity', {property: "light.intensity", to: 0.4, dur: aDuration, easing: "linear"});

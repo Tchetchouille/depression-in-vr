@@ -122,7 +122,6 @@
             </a-plane>
 
 
-
             <!--SCENE REFERENCE-->
             <!--Allows to move and rotate the whole scene easily-->
             <a-entity id="sceneRef"
@@ -327,6 +326,7 @@
                 </a-plane>
                 <a-entity id="stool"
                     position="0.60 0 0"
+                    shadow="cast: true; receive: true"
                 >
                     <a-cylinder
                         scale="0.25 0.07 0.25" position="0 0.4 0"
@@ -502,7 +502,8 @@
 
 
         <!--SCRIPTS-->
-        <script src="components/evolution.js"></script>
+        <script src="scripts/globalVariables.js"></script>
+        <script src="scripts/evolution.js"></script>
         <script src="components/resize.js"></script>
         <script src="components/sunset.js"></script>
     </body>

@@ -31,7 +31,7 @@ let laptopScreenData = [
     //current step
     0,
     //time limits
-    [0, 15, 40, 95, 105, 115],
+    [0, 15, 40, 85, 105, 115],
     //textures
     ["#welcomeTexture", "#note1Texture", "#note2Texture", "#delaiTexture", "#suicideTexture", "#note3Texture"],
 ];
@@ -73,7 +73,7 @@ let lookReferences = [
 //I also use it as a way to activate the different sound effects.
 let timer = 0;
 setInterval(function(){
-    timer++;
+    timer ++;
 
     //This is very usefull to manage events
     console.log("timer : " + timer);
@@ -101,12 +101,12 @@ setInterval(function(){
             document.getElementById('roomDoor').setAttribute('sound', {src: "#pizzaSound"});
             document.getElementById('roomDoor').components.sound.playSound();
             break;
-        case 130:
+        case globalActualDuration:
             document.getElementById('blackScreen').setAttribute('animation__fade', {property: "opacity", to: 1, dur: 5000});
             break;
     }
 
-}, 1000);
+}, 1000 / globalSpeed);
 
 
 
