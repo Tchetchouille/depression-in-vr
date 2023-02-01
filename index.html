@@ -22,8 +22,6 @@
                 <a-asset-item id="bedAsset" src="/assets/gltf/bed_abtinma1382/scene.gltf"></a-asset-item>
                 <!--"Door with frame" (https://skfb.ly/6VKAQ) by witnessk is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).-->
                 <a-asset-item id="doorAsset" src="/assets/gltf/door_witnessk/scene.gltf"></a-asset-item>
-                <!--"Table" (https://skfb.ly/ozLHP) by VkYsNuiPeRaJoK is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).-->
-                <a-asset-item id="deskAsset" src="/assets/gltf/table_VkYsNuiPeRaJoK/scene.gltf"></a-asset-item>
                 <!--"Low-Poly Simple Two-Door Locker" (https://skfb.ly/orqs6) by exodaniel is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).-->
                 <a-asset-item id="closetAsset" src="/assets/gltf/locker_exodaniel/scene.gltf"></a-asset-item>
                 <!--"Curtain Flannel" (https://skfb.ly/o9XK7) by lugsserg is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).-->
@@ -53,7 +51,6 @@
                 <!-- Image by DrawingMyDiary on Freepik https://www.freepik.com/free-vector/calling-screen-with-faceless-avatar-isolated-vector-illustration_16294583.htm#query=call&position=11&from_view=search&track=sph -->
                 <img id="callTexture" src="/assets/textures/phone/call.jpg">
 
-
                 <!--My own textures-->
                 <img id="welcomeTexture" src="/assets/textures/laptop/welcomeUnil.png">
                 <img id="suicideTexture" src="/assets/textures/laptop/suicide.png">
@@ -76,14 +73,12 @@
                 <!--My own sounds-->
                 <audio id="pizzaSound" src="assets/sounds/pizza.mp3" preload="auto"></audio>
                 <audio id="knockSound" src="assets/sounds/knock.mp3" preload="auto"></audio>
-
-
             </a-assets>
 
 
             <!--CAMERA-->
             <a-camera id="playerCam"
-                camera="active: true" look-controls
+                camera="active: true" look-controls wasd-controls-enabled="false"
                 position="0 1.6 0"
             >
                 <a-entity id="vision"
@@ -269,6 +264,7 @@
                     }
                     scene.appendChild(rods);
                 </script>
+
 
                 <!--FURNITURES--> 
                 <a-entity id="bed"
